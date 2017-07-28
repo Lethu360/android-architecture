@@ -16,50 +16,48 @@
 
 package com.example.android.architecture.blueprints.todoapp.data.source;
 
-import android.support.annotation.NonNull;
-
-import com.example.android.architecture.blueprints.todoapp.data.Task;
-
-import java.util.List;
+import com.example.android.architecture.blueprints.todoapp.data.Task
 
 /**
  * Main entry point for accessing tasks data.
+ *
+ * Converted to kotlin by whylee259@gmail.com
  */
-public interface TasksDataSource {
+interface TasksDataSource {
 
     interface LoadTasksCallback {
 
-        void onTasksLoaded(List<Task> tasks);
+        fun onTasksLoaded(tasks: List<Task>?)
 
-        void onDataNotAvailable();
+        fun onDataNotAvailable()
     }
 
     interface GetTaskCallback {
 
-        void onTaskLoaded(Task task);
+        fun onTaskLoaded(task: Task?)
 
-        void onDataNotAvailable();
+        fun onDataNotAvailable()
     }
 
-    void getTasks(@NonNull LoadTasksCallback callback);
+    fun getTasks(callback: LoadTasksCallback)
 
-    void getTask(@NonNull String taskId, @NonNull GetTaskCallback callback);
+    fun getTask(taskId: String, callback: GetTaskCallback)
 
-    void saveTask(@NonNull Task task);
+    fun saveTask(task: Task)
 
-    void completeTask(@NonNull Task task);
+    fun completeTask(task: Task)
 
-    void completeTask(@NonNull String taskId);
+    fun completeTask(taskId: String)
 
-    void activateTask(@NonNull Task task);
+    fun activateTask(task: Task)
 
-    void activateTask(@NonNull String taskId);
+    fun activateTask(taskId: String)
 
-    void clearCompletedTasks();
+    fun clearCompletedTasks()
 
-    void refreshTasks();
+    fun refreshTasks()
 
-    void deleteAllTasks();
+    fun deleteAllTasks()
 
-    void deleteTask(@NonNull String taskId);
+    fun deleteTask(taskId: String)
 }
