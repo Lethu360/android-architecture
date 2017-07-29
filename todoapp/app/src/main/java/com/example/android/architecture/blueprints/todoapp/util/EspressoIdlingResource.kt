@@ -14,29 +14,30 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.util;
+package com.example.android.architecture.blueprints.todoapp.util
 
-import android.support.test.espresso.IdlingResource;
+import android.support.test.espresso.IdlingResource
 
 /**
  * Contains a static reference to {@link IdlingResource}, only available in the 'mock' build type.
+ *
+ * Converted to kotlin by whylee259@gmail.com
  */
-public class EspressoIdlingResource {
+object EspressoIdlingResource {
 
-    private static final String RESOURCE = "GLOBAL";
+    private const val RESOURCE = "GLOBAL"
 
-    private static SimpleCountingIdlingResource mCountingIdlingResource =
-            new SimpleCountingIdlingResource(RESOURCE);
+    private val mCountingIdlingResource = SimpleCountingIdlingResource(RESOURCE)
 
-    public static void increment() {
-        mCountingIdlingResource.increment();
+    @JvmStatic fun increment() {
+        mCountingIdlingResource.increment()
     }
 
-    public static void decrement() {
-        mCountingIdlingResource.decrement();
+    @JvmStatic fun decrement() {
+        mCountingIdlingResource.decrement()
     }
 
-    public static IdlingResource getIdlingResource() {
-        return mCountingIdlingResource;
+    @JvmStatic fun getIdlingResource(): IdlingResource {
+        return mCountingIdlingResource
     }
 }
