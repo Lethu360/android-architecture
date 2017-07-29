@@ -21,7 +21,6 @@ import android.content.Context
 import com.example.android.architecture.blueprints.todoapp.data.Task
 import com.example.android.architecture.blueprints.todoapp.data.source.TasksDataSource
 import com.example.android.architecture.blueprints.todoapp.data.source.local.TasksPersistenceContract.TaskEntry
-import java.util.*
 
 
 /**
@@ -38,11 +37,13 @@ private constructor(context: Context) : TasksDataSource {
     companion object {
         private var INSTANCE: TasksLocalDataSource? = null
 
-        fun getInstance(context: Context): TasksLocalDataSource {
-            return INSTANCE ?: TasksLocalDataSource(context)
+        @JvmStatic fun getInstance(context: Context): TasksLocalDataSource {
+            if (INSTANCE == null) {
+                INSTANCE = TasksLocalDataSource(context)
+            }
+            return INSTANCE!!
         }
     }
-
 
     /**
      * Note: {@link LoadTasksCallback#onDataNotAvailable()} is fired if the database doesn't exist

@@ -47,10 +47,13 @@ private constructor(
          * @param tasksLocalDataSource  the device storage data source
          * @return the {@link TasksRepository} instance
          */
-        fun getInstance(
+        @JvmStatic fun getInstance(
                 tasksRemoteDataSource: TasksDataSource,
                 tasksLocalDataSource: TasksDataSource): TasksRepository {
-            return INSTANCE ?: TasksRepository(tasksRemoteDataSource, tasksLocalDataSource)
+            if (INSTANCE == null) {
+                INSTANCE = TasksRepository(tasksRemoteDataSource, tasksLocalDataSource)
+            }
+            return INSTANCE!!
         }
 
         /**
@@ -213,7 +216,7 @@ private constructor(
                 if (mCachedTasks == null) {
                     mCachedTasks = LinkedHashMap<String, Task>()
                 }
-                task?.let {mCachedTasks!!.put(task.id, task)}
+                task?.let { mCachedTasks!!.put(task.id, task) }
 
                 EspressoIdlingResource.decrement(); // Set app as idle.
 
