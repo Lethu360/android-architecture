@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.tasks;
+package com.example.android.architecture.blueprints.todoapp.tasks
 
 /**
  * Defines the navigation actions that can be called from a list item in the task list.

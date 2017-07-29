@@ -14,18 +14,18 @@
  *  limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.tasks;
+package com.example.android.architecture.blueprints.todoapp.tasks
 
 
-import android.view.View;
+import android.view.View
 
-import com.example.android.architecture.blueprints.todoapp.data.Task;
+import com.example.android.architecture.blueprints.todoapp.data.Task
 
 /**
  * Listener used with data binding to process user actions.
  */
-public interface TaskItemUserActionsListener {
-    void onCompleteChanged(Task task, View v);
+interface TaskItemUserActionsListener {
+    fun onCompleteChanged(task: Task, v: View)
 
-    void onTaskClicked(Task task);
+    fun onTaskClicked(task: Task)
 }
