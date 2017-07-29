@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.tasks;
+package com.example.android.architecture.blueprints.todoapp.tasks
 
 /**
  * Defines the navigation actions that can be called from the task list screen.
+ *
+ * Converted to kotlin by whylee259@gmail.com
  */
-public interface TasksNavigator {
+interface TasksNavigator {
 
-    void addNewTask();
+    fun addNewTask()
 }
