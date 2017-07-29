@@ -14,47 +14,34 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.tasks;
+package com.example.android.architecture.blueprints.todoapp.tasks
 
-import android.content.Context;
-import android.support.annotation.Nullable;
-
-import com.example.android.architecture.blueprints.todoapp.TaskViewModel;
-import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepository;
-
-import java.lang.ref.WeakReference;
+import android.content.Context
+import com.example.android.architecture.blueprints.todoapp.TaskViewModel
+import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepository
+import java.lang.ref.WeakReference
 
 
 /**
  * Listens to user actions from the list item in ({@link TasksFragment}) and redirects them to the
  * Fragment's actions listener.
  */
-public class TaskItemViewModel extends TaskViewModel {
+class TaskItemViewModel constructor(context: Context, tasksRepository: TasksRepository)
+    : TaskViewModel(context, tasksRepository) {
 
     // This navigator is s wrapped in a WeakReference to avoid leaks because it has references to an
     // activity. There's no straightforward way to clear it for each item in a list adapter.
-    @Nullable
-    private WeakReference<TaskItemNavigator> mNavigator;
+    private var mNavigator: WeakReference<TaskItemNavigator>? = null
 
-    public TaskItemViewModel(Context context, TasksRepository tasksRepository) {
-        super(context, tasksRepository);
-    }
-
-    public void setNavigator(TaskItemNavigator navigator) {
-        mNavigator = new WeakReference<>(navigator);
+    fun setNavigator(navigator: TaskItemNavigator) {
+        mNavigator = WeakReference<TaskItemNavigator>(navigator)
     }
 
     /**
      * Called by the Data Binding library when the row is clicked.
      */
-    public void taskClicked() {
-        String taskId = getTaskId();
-        if (taskId == null) {
-            // Click happened before task was loaded, no-op.
-            return;
-        }
-        if (mNavigator != null && mNavigator.get() != null) {
-            mNavigator.get().openTaskDetails(taskId);
-        }
+    fun taskClicked() {
+        val taskId = this.taskId ?: return // Click happened before task was loaded, no-op.
+        mNavigator?.get()?.openTaskDetails(taskId)
     }
 }
