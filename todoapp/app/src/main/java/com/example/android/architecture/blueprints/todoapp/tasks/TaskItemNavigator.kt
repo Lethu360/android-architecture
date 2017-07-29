@@ -18,8 +18,10 @@ package com.example.android.architecture.blueprints.todoapp.tasks;
 
 /**
  * Defines the navigation actions that can be called from a list item in the task list.
+ *
+ * Converted to kotlin by whylee259@gmail.com
  */
-public interface TaskItemNavigator {
+interface TaskItemNavigator {
 
-    void openTaskDetails(String taskId);
+    fun openTaskDetails(taskId: String)
 }
