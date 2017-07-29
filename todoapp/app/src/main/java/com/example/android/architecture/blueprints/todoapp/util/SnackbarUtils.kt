@@ -14,20 +14,22 @@
  *  limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.util;
+package com.example.android.architecture.blueprints.todoapp.util
 
-import android.support.design.widget.Snackbar;
-import android.view.View;
+import android.support.design.widget.Snackbar
+import android.view.View
 
 /**
  * Provides a method to show a Snackbar.
+ *
+ * Converted to kotlin by whylee259@gmail.com
  */
-public class SnackbarUtils {
+object SnackbarUtils {
 
-    public static void showSnackbar(View v, String snackbarText) {
+    @JvmStatic fun showSnackbar(v: View?, snackbarText: String?) {
         if (v == null || snackbarText == null) {
-            return;
+            return
         }
-        Snackbar.make(v, snackbarText, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(v, snackbarText, Snackbar.LENGTH_LONG).show()
     }
 }
