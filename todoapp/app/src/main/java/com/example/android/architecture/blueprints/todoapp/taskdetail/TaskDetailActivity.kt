@@ -94,10 +94,10 @@ class TaskDetailActivity : LifecycleAppCompatActivity(), TaskDetailNavigator {
 
     private fun subscribeToNavigationChanges(viewModel: TaskDetailViewModel) {
         // The activity observes the navigation commands in the ViewModel
-        viewModel.editTaskCommand.observe(this, Observer<Void> {
+        viewModel.getEditTaskCommand().observe(this, Observer<Void> {
             this@TaskDetailActivity.onStartEditTask()
         })
-        viewModel.deleteTaskCommand.observe(this, Observer<Void> {
+        viewModel.getDeleteTaskCommand().observe(this, Observer<Void> {
             this@TaskDetailActivity.onTaskDeleted()
         })
     }

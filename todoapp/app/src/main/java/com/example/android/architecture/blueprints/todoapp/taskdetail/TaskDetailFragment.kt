@@ -18,6 +18,7 @@ package com.example.android.architecture.blueprints.todoapp.taskdetail
 
 import android.arch.lifecycle.LifecycleFragment
 import android.os.Bundle
+import android.support.annotation.StringRes
 import android.support.design.widget.FloatingActionButton
 import android.view.LayoutInflater
 import android.view.Menu
@@ -62,7 +63,7 @@ class TaskDetailFragment : LifecycleFragment() {
     }
 
     private fun setupSnackbar() {
-        mViewModel.snackbarMessage.observe(this, SnackbarMessage.SnackbarObserver {
+        mViewModel.getSnackbarMessage().observe(this, SnackbarMessage.SnackbarObserver {
             snackbarMessageResourceId ->
                 SnackbarUtils.showSnackbar(view, getString(snackbarMessageResourceId))
         })
@@ -112,9 +113,9 @@ class TaskDetailFragment : LifecycleFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_delete -> {
-            mViewModel.deleteTask()
+                mViewModel.deleteTask()
                 return true
-        }
+            }
         }
         return false
     }
