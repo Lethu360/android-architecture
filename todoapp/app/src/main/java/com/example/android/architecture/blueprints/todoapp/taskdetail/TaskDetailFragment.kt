@@ -102,8 +102,10 @@ class TaskDetailFragment : LifecycleFragment() {
     }
 
     private fun getTaskDetailUserActionsListener(): TaskDetailUserActionsListener {
-        return TaskDetailUserActionsListener {
-            v -> mViewModel.setCompleted((v as CheckBox).isChecked)
+        return object : TaskDetailUserActionsListener {
+            override fun onCompleteChanged(v: View) {
+                mViewModel.setCompleted((v as CheckBox).isChecked)
+            }
         }
     }
 
