@@ -26,7 +26,7 @@ import android.support.v7.app.AppCompatActivity
  * Temporary class until Architecture Components is final. Makes {@link AppCompatActivity} a
  * {@link LifecycleRegistryOwner}.
  */
-class LifecycleAppCompatActivity : AppCompatActivity(), LifecycleRegistryOwner {
+open class LifecycleAppCompatActivity : AppCompatActivity(), LifecycleRegistryOwner {
 
     private val mRegistry = LifecycleRegistry(this)
 
