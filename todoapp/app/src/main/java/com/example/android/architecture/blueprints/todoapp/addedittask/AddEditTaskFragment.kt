@@ -82,7 +82,7 @@ class AddEditTaskFragment : LifecycleFragment() {
     }
 
     private fun setupSnackbar() {
-        mViewModel.snackbarMessage.observe(this, SnackbarMessage.SnackbarObserver {
+        mViewModel.getSnackbarMessage().observe(this, SnackbarMessage.SnackbarObserver {
             snackbarMessageResourceId ->
             SnackbarUtils.showSnackbar(view, getString(snackbarMessageResourceId))
         })

@@ -79,7 +79,7 @@ class AddEditTaskActivity : LifecycleAppCompatActivity(), AddEditTaskNavigator {
         val viewModel = obtainViewModel(this)
 
         // The activity observes the navigation events in the ViewModel
-        viewModel.taskUpdatedEvent.observe(this,  Observer<Void> {
+        viewModel.getTaskUpdatedEvent().observe(this,  Observer<Void> {
                 AddEditTaskActivity@this.onTaskSaved()
         })
     }
