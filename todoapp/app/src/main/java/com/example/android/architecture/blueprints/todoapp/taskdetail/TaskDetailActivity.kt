@@ -30,7 +30,7 @@ import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTa
 import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskFragment
 import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils
 
-import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskActivity.ADD_EDIT_RESULT_OK
+import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskActivity.Companion.ADD_EDIT_RESULT_OK
 import com.example.android.architecture.blueprints.todoapp.taskdetail.TaskDetailFragment.Companion.REQUEST_EDIT_TASK
 
 /**
