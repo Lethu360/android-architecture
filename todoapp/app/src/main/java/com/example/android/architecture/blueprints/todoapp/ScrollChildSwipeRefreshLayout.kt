@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp;
+package com.example.android.architecture.blueprints.todoapp
 
-import android.content.Context;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.AttributeSet;
-import android.view.View;
+import android.content.Context
+import android.support.v4.view.ViewCompat
+import android.support.v4.widget.SwipeRefreshLayout
+import android.util.AttributeSet
+import android.view.View
 
 /**
  * Extends {@link SwipeRefreshLayout} to support non-direct descendant scrolling views.
@@ -29,27 +29,20 @@ import android.view.View;
  * the refresh only when the view is on top. This class adds a way (@link #setScrollUpChild} to
  * define which view controls this behavior.
  */
-public class ScrollChildSwipeRefreshLayout extends SwipeRefreshLayout {
+class ScrollChildSwipeRefreshLayout : SwipeRefreshLayout {
 
-    private View mScrollUpChild;
+    private var mScrollUpChild: View? = null
 
-    public ScrollChildSwipeRefreshLayout(Context context) {
-        super(context);
+    constructor(context: Context) : super(context)
+
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+
+    override fun canChildScrollUp(): Boolean {
+        return mScrollUpChild?.let { ViewCompat.canScrollVertically(it, -1) }
+                ?: super.canChildScrollUp()
     }
 
-    public ScrollChildSwipeRefreshLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    @Override
-    public boolean canChildScrollUp() {
-        if (mScrollUpChild != null) {
-            return ViewCompat.canScrollVertically(mScrollUpChild, -1);
-        }
-        return super.canChildScrollUp();
-    }
-
-    public void setScrollUpChild(View view) {
-        mScrollUpChild = view;
+    fun setScrollUpChild(view: View) {
+        mScrollUpChild = view
     }
 }
