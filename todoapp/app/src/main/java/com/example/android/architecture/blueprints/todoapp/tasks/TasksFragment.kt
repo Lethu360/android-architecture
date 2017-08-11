@@ -18,6 +18,7 @@ package com.example.android.architecture.blueprints.todoapp.tasks
 
 import android.arch.lifecycle.LifecycleFragment
 import android.os.Bundle
+import android.support.annotation.StringRes
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.PopupMenu
@@ -101,8 +102,10 @@ class TasksFragment :
     }
 
     private fun setupSnackbar() {
-        mTasksViewModel.getSnackbarMessage().observe(this, SnackbarMessage.SnackbarObserver {
-            SnackbarUtils.showSnackbar(view, getString(it))
+        mTasksViewModel.getSnackbarMessage().observe(this, object : SnackbarMessage.SnackbarObserver {
+            override fun onNewMessage(@StringRes snackbarMessageResourceId: Int) {
+                SnackbarUtils.showSnackbar(view, getString(snackbarMessageResourceId))
+            }
         })
     }
 

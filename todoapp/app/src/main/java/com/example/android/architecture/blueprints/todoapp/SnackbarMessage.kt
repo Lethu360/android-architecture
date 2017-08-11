@@ -14,12 +14,11 @@
  *  limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp;
+package com.example.android.architecture.blueprints.todoapp
 
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.Observer;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.Observer
+import android.support.annotation.StringRes
 
 /**
  * A SingleLiveEvent used for Snackbar messages. Like a {@link SingleLiveEvent} but also prevents
@@ -27,26 +26,22 @@ import android.support.annotation.StringRes;
  * <p>
  * Note that only one observer is going to be notified of changes.
  */
-public class SnackbarMessage extends SingleLiveEvent<Integer> {
+class SnackbarMessage : SingleLiveEvent<Int>() {
 
-    public void observe(LifecycleOwner owner, final SnackbarObserver observer) {
-        super.observe(owner, new Observer<Integer>() {
-            @Override
-            public void onChanged(@Nullable Integer t) {
-                if (t == null) {
-                    return;
-                }
-                observer.onNewMessage(t);
+    fun observe(owner: LifecycleOwner, observer: SnackbarObserver) {
+        super.observe(owner, Observer<Int> {
+            t -> t?.run {
+                observer.onNewMessage(this)
             }
-        });
+        })
     }
 
-    public interface SnackbarObserver {
+    interface SnackbarObserver {
         /**
          * Called when there is a new message to be shown.
          * @param snackbarMessageResourceId The new message, non-null.
          */
-        void onNewMessage(@StringRes int snackbarMessageResourceId);
+        fun onNewMessage(@StringRes snackbarMessageResourceId: Int)
     }
 
 }

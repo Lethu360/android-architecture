@@ -18,6 +18,7 @@ package com.example.android.architecture.blueprints.todoapp.addedittask
 
 import android.arch.lifecycle.LifecycleFragment
 import android.os.Bundle
+import android.support.annotation.StringRes
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
@@ -82,15 +83,16 @@ class AddEditTaskFragment : LifecycleFragment() {
     }
 
     private fun setupSnackbar() {
-        mViewModel.getSnackbarMessage().observe(this, SnackbarMessage.SnackbarObserver {
-            snackbarMessageResourceId ->
-            SnackbarUtils.showSnackbar(view, getString(snackbarMessageResourceId))
+        mViewModel.getSnackbarMessage().observe(this, object : SnackbarMessage.SnackbarObserver {
+            override fun onNewMessage(@StringRes snackbarMessageResourceId: Int) {
+                SnackbarUtils.showSnackbar(view, getString(snackbarMessageResourceId))
+            }
         })
     }
 
     private fun setupFab() {
         val fab = activity.findViewById(R.id.fab_edit_task_done) as FloatingActionButton?
-        fab?.run{
+        fab?.run {
             setImageResource(R.drawable.ic_done)
             setOnClickListener({
                 mViewModel.saveTask()

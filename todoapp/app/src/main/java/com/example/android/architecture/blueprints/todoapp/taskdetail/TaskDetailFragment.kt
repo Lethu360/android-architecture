@@ -63,9 +63,10 @@ class TaskDetailFragment : LifecycleFragment() {
     }
 
     private fun setupSnackbar() {
-        mViewModel.getSnackbarMessage().observe(this, SnackbarMessage.SnackbarObserver {
-            snackbarMessageResourceId ->
+        mViewModel.getSnackbarMessage().observe(this, object : SnackbarMessage.SnackbarObserver {
+            override fun onNewMessage(@StringRes snackbarMessageResourceId: Int) {
                 SnackbarUtils.showSnackbar(view, getString(snackbarMessageResourceId))
+            }
         })
     }
 
@@ -73,7 +74,7 @@ class TaskDetailFragment : LifecycleFragment() {
         val fab = activity.findViewById(R.id.fab_edit_task) as FloatingActionButton?
 
         fab?.setOnClickListener({
-                mViewModel.editTask()
+            mViewModel.editTask()
         })
     }
 
