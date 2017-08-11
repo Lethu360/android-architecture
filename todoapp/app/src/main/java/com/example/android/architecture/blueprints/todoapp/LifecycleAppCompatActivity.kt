@@ -14,23 +14,23 @@
  *  limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp;
+package com.example.android.architecture.blueprints.todoapp
 
-import android.arch.lifecycle.LifecycleRegistry;
-import android.arch.lifecycle.LifecycleRegistryOwner;
-import android.support.v7.app.AppCompatActivity;
+import android.annotation.SuppressLint
+import android.arch.lifecycle.LifecycleRegistry
+import android.arch.lifecycle.LifecycleRegistryOwner
+import android.support.v7.app.AppCompatActivity
 
+@SuppressLint("Registered")
 /**
  * Temporary class until Architecture Components is final. Makes {@link AppCompatActivity} a
  * {@link LifecycleRegistryOwner}.
  */
-public class LifecycleAppCompatActivity extends AppCompatActivity
-        implements LifecycleRegistryOwner {
+class LifecycleAppCompatActivity : AppCompatActivity(), LifecycleRegistryOwner {
 
-    private final LifecycleRegistry mRegistry = new LifecycleRegistry(this);
+    private val mRegistry = LifecycleRegistry(this)
 
-    @Override
-    public LifecycleRegistry getLifecycle() {
-        return mRegistry;
+    override fun getLifecycle(): LifecycleRegistry {
+        return mRegistry
     }
 }
