@@ -14,114 +14,98 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.addedittask;
+package com.example.android.architecture.blueprints.todoapp.addedittask
 
-import android.arch.lifecycle.LifecycleFragment;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.arch.lifecycle.LifecycleFragment
+import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
+import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 
-import com.example.android.architecture.blueprints.todoapp.R;
-import com.example.android.architecture.blueprints.todoapp.SnackbarMessage;
-import com.example.android.architecture.blueprints.todoapp.databinding.AddtaskFragBinding;
-import com.example.android.architecture.blueprints.todoapp.util.SnackbarUtils;
+import com.example.android.architecture.blueprints.todoapp.R
+import com.example.android.architecture.blueprints.todoapp.SnackbarMessage
+import com.example.android.architecture.blueprints.todoapp.databinding.AddtaskFragBinding
+import com.example.android.architecture.blueprints.todoapp.util.SnackbarUtils
 
 /**
  * Main UI for the add task screen. Users can enter a task title and description.
  */
-public class AddEditTaskFragment extends LifecycleFragment {
+class AddEditTaskFragment : LifecycleFragment() {
+    // Required empty public constructor
 
-    public static final String ARGUMENT_EDIT_TASK_ID = "EDIT_TASK_ID";
+    companion object {
+        const val ARGUMENT_EDIT_TASK_ID = "EDIT_TASK_ID"
 
-    private AddEditTaskViewModel mViewModel;
-
-    private AddtaskFragBinding mViewDataBinding;
-
-    public static AddEditTaskFragment newInstance() {
-        return new AddEditTaskFragment();
+        @JvmStatic fun newInstance(): AddEditTaskFragment {
+            return AddEditTaskFragment()
+        }
     }
 
-    public AddEditTaskFragment() {
-        // Required empty public constructor
+    private lateinit var mViewModel: AddEditTaskViewModel
+
+    private var mViewDataBinding: AddtaskFragBinding? = null
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        setupFab()
+
+        setupSnackbar()
+
+        setupActionBar()
+
+        loadData()
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        setupFab();
-
-        setupSnackbar();
-
-        setupActionBar();
-
-        loadData();
-    }
-
-    private void loadData() {
+    private fun loadData() {
         // Add or edit an existing task?
-        if (getArguments() != null) {
-            mViewModel.start(getArguments().getString(ARGUMENT_EDIT_TASK_ID));
-        } else {
-            mViewModel.start(null);
-        }
+        mViewModel.start(arguments?.getString(ARGUMENT_EDIT_TASK_ID))
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        final View root = inflater.inflate(R.layout.addtask_frag, container, false);
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        val root = inflater.inflate(R.layout.addtask_frag, container, false)
         if (mViewDataBinding == null) {
-            mViewDataBinding = AddtaskFragBinding.bind(root);
+            mViewDataBinding = AddtaskFragBinding.bind(root)
         }
 
-        mViewModel = AddEditTaskActivity.obtainViewModel(getActivity());
+        mViewModel = AddEditTaskActivity.obtainViewModel(activity)
 
-        mViewDataBinding.setViewmodel(mViewModel);
+        mViewDataBinding!!.viewmodel = mViewModel
 
-        setHasOptionsMenu(true);
-        setRetainInstance(false);
+        setHasOptionsMenu(true)
+        retainInstance = false
 
-        return mViewDataBinding.getRoot();
+        return mViewDataBinding!!.root
     }
 
-    private void setupSnackbar() {
-        mViewModel.getSnackbarMessage().observe(this, new SnackbarMessage.SnackbarObserver() {
-            @Override
-            public void onNewMessage(@StringRes int snackbarMessageResourceId) {
-                SnackbarUtils.showSnackbar(getView(), getString(snackbarMessageResourceId));
-            }
-        });
+    private fun setupSnackbar() {
+        mViewModel.snackbarMessage.observe(this, SnackbarMessage.SnackbarObserver {
+            snackbarMessageResourceId ->
+            SnackbarUtils.showSnackbar(view, getString(snackbarMessageResourceId))
+        })
     }
 
-    private void setupFab() {
-        FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab_edit_task_done);
-        fab.setImageResource(R.drawable.ic_done);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mViewModel.saveTask();
-            }
-        });
-    }
-
-    private void setupActionBar() {
-        ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
-        if (actionBar == null) {
-            return;
+    private fun setupFab() {
+        val fab = activity.findViewById(R.id.fab_edit_task_done) as FloatingActionButton?
+        fab?.run{
+            setImageResource(R.drawable.ic_done)
+            setOnClickListener({
+                mViewModel.saveTask()
+            })
         }
-        if (getArguments() != null) {
-            actionBar.setTitle(R.string.edit_task);
-        } else {
-            actionBar.setTitle(R.string.add_task);
+    }
+
+    private fun setupActionBar() {
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.run {
+            if (arguments != null) {
+                setTitle(R.string.edit_task)
+            } else {
+                setTitle(R.string.add_task)
+            }
         }
     }
 }
