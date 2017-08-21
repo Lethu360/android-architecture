@@ -31,7 +31,7 @@ import com.example.android.architecture.blueprints.todoapp.util.EspressoIdlingRe
  *
  * //TODO: Implement this class using LiveData.
  */
-class TasksRepository
+open class TasksRepository
 // Prevent direct instantiation.
 private constructor(
         tasksRemoteDataSource: TasksDataSource,
@@ -60,7 +60,7 @@ private constructor(
          * Used to force {@link #getInstance(TasksDataSource, TasksDataSource)} to create a new instance
          * next time it's called.
          */
-        fun destroyInstance() {
+        @JvmStatic fun destroyInstance() {
             INSTANCE = null
         }
     }
@@ -72,7 +72,8 @@ private constructor(
     /**
      * This variable has package local visibility so it can be accessed from tests.
      */
-    private var mCachedTasks: MutableMap<String, Task>? = null
+    @JvmField
+    var mCachedTasks: MutableMap<String, Task>? = null
 
     /**
      * Marks the cache as invalid, to force an update the next time data is requested. This variable

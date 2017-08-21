@@ -46,23 +46,23 @@ class TasksViewModel constructor(context: Application, repository: TasksReposito
     : AndroidViewModel(context) {
 
     // These observable fields will update Views automatically
-    val items = ObservableArrayList<Task>()
+    @JvmField val items = ObservableArrayList<Task>()
 
-    val dataLoading = ObservableBoolean(false)
+    @JvmField val dataLoading = ObservableBoolean(false)
 
-    val currentFilteringLabel = ObservableField<String>()
+    @JvmField val currentFilteringLabel = ObservableField<String>()
 
-    val noTasksLabel = ObservableField<String>()
+    @JvmField val noTasksLabel = ObservableField<String>()
 
-    val noTaskIconRes = ObservableField<Drawable>()
+    @JvmField val noTaskIconRes = ObservableField<Drawable>()
 
-    val empty = ObservableBoolean(false)
+    @JvmField val empty = ObservableBoolean(false)
 
-    val tasksAddViewVisible = ObservableBoolean()
+    @JvmField val tasksAddViewVisible = ObservableBoolean()
 
-    val mSnackbarText = SnackbarMessage()
+    @JvmField val mSnackbarText = SnackbarMessage()
 
-    var mCurrentFiltering = TasksFilterType.ALL_TASKS
+    @JvmField var mCurrentFiltering = TasksFilterType.ALL_TASKS
 
     private val mTasksRepository = repository
 

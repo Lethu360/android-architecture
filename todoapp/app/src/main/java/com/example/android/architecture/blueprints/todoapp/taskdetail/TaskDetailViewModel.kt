@@ -37,9 +37,9 @@ import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepo
 class TaskDetailViewModel constructor(context: Application, tasksRepository: TasksRepository)
     : AndroidViewModel(context), TasksDataSource.GetTaskCallback {
 
-    val task = ObservableField<Task>()
+    @JvmField val task = ObservableField<Task>()
 
-    val completed = ObservableBoolean()
+    @JvmField val completed = ObservableBoolean()
 
     private val mEditTaskCommand = SingleLiveEvent<Void>()
 

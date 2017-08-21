@@ -37,7 +37,7 @@ import com.example.android.architecture.blueprints.todoapp.taskdetail.TaskDetail
 import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils
 
 
-class TasksActivity : LifecycleAppCompatActivity(), TaskItemNavigator, TasksNavigator {
+open class TasksActivity : LifecycleAppCompatActivity(), TaskItemNavigator, TasksNavigator {
 
     private lateinit var mDrawerLayout: DrawerLayout
 
