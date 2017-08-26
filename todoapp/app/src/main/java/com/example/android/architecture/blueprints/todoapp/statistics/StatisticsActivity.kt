@@ -30,7 +30,7 @@ import android.view.MenuItem
 import com.example.android.architecture.blueprints.todoapp.R
 import com.example.android.architecture.blueprints.todoapp.ViewModelFactory
 import com.example.android.architecture.blueprints.todoapp.tasks.TasksActivity
-import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils
+import com.example.android.architecture.blueprints.todoapp.util.replaceFragmentInActivity
 
 /**
  * Show statistics for tasks.
@@ -75,8 +75,7 @@ class StatisticsActivity : AppCompatActivity() {
         return supportFragmentManager.findFragmentById(R.id.contentFrame) as StatisticsFragment?
                 ?:
                 StatisticsFragment.newInstance().apply {
-                    ActivityUtils.replaceFragmentInActivity(
-                            supportFragmentManager, this, R.id.contentFrame)
+                    this@StatisticsActivity.replaceFragmentInActivity(this, R.id.contentFrame)
                 }
     }
 

@@ -25,7 +25,7 @@ import android.support.v7.widget.Toolbar
 import com.example.android.architecture.blueprints.todoapp.LifecycleAppCompatActivity
 import com.example.android.architecture.blueprints.todoapp.R
 import com.example.android.architecture.blueprints.todoapp.ViewModelFactory
-import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils
+import com.example.android.architecture.blueprints.todoapp.util.replaceFragmentInActivity
 
 /**
  * Displays an add or edit task screen.
@@ -69,8 +69,7 @@ class AddEditTaskActivity : LifecycleAppCompatActivity(), AddEditTaskNavigator {
 
         val addEditTaskFragment = obtainViewFragment()
 
-        ActivityUtils.replaceFragmentInActivity(supportFragmentManager,
-                addEditTaskFragment, R.id.contentFrame)
+        replaceFragmentInActivity(addEditTaskFragment, R.id.contentFrame)
 
         subscribeToNavigationChanges()
     }

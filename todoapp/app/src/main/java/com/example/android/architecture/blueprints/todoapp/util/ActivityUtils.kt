@@ -14,44 +14,37 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.util
-
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-
-
 /**
  * This provides methods to help Activities load their UI.
  *
  * Converted to kotlin by whylee259@gmail.com
  */
-object ActivityUtils {
 
-    /**
-     * The {@code fragment} is added to the container view with id {@code frameId}. The operation is
-     * performed by the {@code fragmentManager}.
-     *
-     */
-    @JvmStatic fun replaceFragmentInActivity(fragmentManager: FragmentManager,
-                                             fragment: Fragment, frameId: Int) {
-        checkNotNull(fragmentManager)
-        checkNotNull(fragment)
-        val transaction = fragmentManager.beginTransaction()
-        transaction.replace(frameId, fragment)
-        transaction.commit()
-    }
+package com.example.android.architecture.blueprints.todoapp.util
 
-    /**
-     * The {@code fragment} is added to the container view with id {@code frameId}. The operation is
-     * performed by the {@code fragmentManager}.
-     *
-     */
-    @JvmStatic fun replaceFragmentInActivity(fragmentManager: FragmentManager,
-                                             fragment: Fragment, tag: String) {
-        checkNotNull(fragmentManager)
-        checkNotNull(fragment)
-        val transaction = fragmentManager.beginTransaction()
-        transaction.add(fragment, tag)
-        transaction.commit()
-    }
+import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
+
+
+
+/**
+ * The {@code fragment} is added to the container view with id {@code frameId}. The operation is
+ * performed by the {@code fragmentManager}.
+ *
+ */
+fun AppCompatActivity.replaceFragmentInActivity(fragment: Fragment, frameId: Int) {
+    val transaction = supportFragmentManager.beginTransaction()
+    transaction.replace(frameId, fragment)
+    transaction.commit()
+}
+
+/**
+ * The {@code fragment} is added to the container view with id {@code frameId}. The operation is
+ * performed by the {@code fragmentManager}.
+ *
+ */
+fun AppCompatActivity.replaceFragmentInActivity(fragment: Fragment, tag: String) {
+    val transaction = supportFragmentManager.beginTransaction()
+    transaction.add(fragment, tag)
+    transaction.commit()
 }

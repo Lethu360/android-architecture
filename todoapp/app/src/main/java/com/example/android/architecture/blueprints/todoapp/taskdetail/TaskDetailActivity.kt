@@ -28,10 +28,10 @@ import com.example.android.architecture.blueprints.todoapp.R
 import com.example.android.architecture.blueprints.todoapp.ViewModelFactory
 import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskActivity
 import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskFragment
-import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils
 
 import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskActivity.Companion.ADD_EDIT_RESULT_OK
 import com.example.android.architecture.blueprints.todoapp.taskdetail.TaskDetailFragment.Companion.REQUEST_EDIT_TASK
+import com.example.android.architecture.blueprints.todoapp.util.replaceFragmentInActivity
 
 /**
  * Displays task details screen.
@@ -64,8 +64,7 @@ class TaskDetailActivity : LifecycleAppCompatActivity(), TaskDetailNavigator {
 
         val taskDetailFragment = findOrCreateViewFragment()
 
-        ActivityUtils.replaceFragmentInActivity(supportFragmentManager,
-                taskDetailFragment, R.id.contentFrame)
+        replaceFragmentInActivity(taskDetailFragment, R.id.contentFrame)
 
         mTaskViewModel = obtainViewModel(this)
 

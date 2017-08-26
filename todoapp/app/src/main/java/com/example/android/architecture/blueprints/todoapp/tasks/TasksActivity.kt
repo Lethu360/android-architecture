@@ -34,7 +34,7 @@ import com.example.android.architecture.blueprints.todoapp.ViewModelFactory
 import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskActivity
 import com.example.android.architecture.blueprints.todoapp.statistics.StatisticsActivity
 import com.example.android.architecture.blueprints.todoapp.taskdetail.TaskDetailActivity
-import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils
+import com.example.android.architecture.blueprints.todoapp.util.replaceFragmentInActivity
 
 
 open class TasksActivity : LifecycleAppCompatActivity(), TaskItemNavigator, TasksNavigator {
@@ -69,7 +69,8 @@ open class TasksActivity : LifecycleAppCompatActivity(), TaskItemNavigator, Task
     }
 
     companion object {
-        @JvmStatic fun obtainViewModel(activity: FragmentActivity): TasksViewModel {
+        @JvmStatic
+        fun obtainViewModel(activity: FragmentActivity): TasksViewModel {
             // Use a Factory to inject dependencies into the ViewModel
             val factory = ViewModelFactory.getInstance(activity.getApplication())
 
@@ -84,8 +85,7 @@ open class TasksActivity : LifecycleAppCompatActivity(), TaskItemNavigator, Task
         if (tasksFragment == null) {
             // Create the fragment
             tasksFragment = TasksFragment.newInstance()
-            ActivityUtils.replaceFragmentInActivity(
-                    getSupportFragmentManager(), tasksFragment, R.id.contentFrame)
+            replaceFragmentInActivity(tasksFragment, R.id.contentFrame)
         }
     }
 
