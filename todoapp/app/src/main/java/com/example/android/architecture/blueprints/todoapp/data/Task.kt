@@ -16,6 +16,7 @@
 
 package com.example.android.architecture.blueprints.todoapp.data;
 
+import android.util.Log
 import java.util.*
 
 /**
@@ -76,4 +77,14 @@ data class Task(
     fun isEmpty(): Boolean = title?.isNullOrEmpty()!! && description?.isNullOrEmpty()!!
 
     override fun toString(): String = "Task with title $title"
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true;
+        val task = other as Task
+        return id == task.id &&
+                title == task.title &&
+                description == task.description
+
+    }
+
 }
