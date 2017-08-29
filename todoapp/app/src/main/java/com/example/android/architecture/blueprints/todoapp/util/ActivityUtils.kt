@@ -23,8 +23,8 @@
 package com.example.android.architecture.blueprints.todoapp.util
 
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AppCompatActivity
-
 
 
 /**
@@ -32,7 +32,7 @@ import android.support.v7.app.AppCompatActivity
  * performed by the {@code fragmentManager}.
  *
  */
-fun AppCompatActivity.replaceFragmentInActivity(fragment: Fragment, frameId: Int) {
+fun FragmentActivity.replaceFragmentInActivity(fragment: Fragment, frameId: Int) {
     val transaction = supportFragmentManager.beginTransaction()
     transaction.replace(frameId, fragment)
     transaction.commit()
@@ -43,7 +43,7 @@ fun AppCompatActivity.replaceFragmentInActivity(fragment: Fragment, frameId: Int
  * performed by the {@code fragmentManager}.
  *
  */
-fun AppCompatActivity.replaceFragmentInActivity(fragment: Fragment, tag: String) {
+fun FragmentActivity.replaceFragmentInActivity(fragment: Fragment, tag: String) {
     val transaction = supportFragmentManager.beginTransaction()
     transaction.add(fragment, tag)
     transaction.commit()
