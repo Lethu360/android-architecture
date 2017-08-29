@@ -40,10 +40,8 @@ import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepo
 class AddEditTaskViewModel constructor(context: Application, tasksRepository: TasksRepository)
     : AndroidViewModel(context), TasksDataSource.GetTaskCallback {
 
-    @JvmField
     val title = ObservableField<String>()
 
-    @JvmField
     val description = ObservableField<String>()
 
     val dataLoading = ObservableBoolean(false)

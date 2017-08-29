@@ -34,11 +34,11 @@ import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepo
 abstract class TaskViewModel(context: Context, tasksRepository: TasksRepository)
     : BaseObservable(), TasksDataSource.GetTaskCallback {
 
-    @JvmField val snackbarText = ObservableField<String>()
+    val snackbarText = ObservableField<String>()
 
-    @JvmField val title = ObservableField<String>()
+    val title = ObservableField<String>()
 
-    @JvmField val description = ObservableField<String>()
+    val description = ObservableField<String>()
 
     private val mTaskObservable = ObservableField<Task>()
 

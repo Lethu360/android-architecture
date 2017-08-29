@@ -38,18 +38,18 @@ import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepo
 class StatisticsViewModel constructor(context: Application, tasksRepository: TasksRepository)
     : AndroidViewModel(context) {
 
-    @JvmField val dataLoading = ObservableBoolean(false)
+    val dataLoading = ObservableBoolean(false)
 
-    @JvmField val error = ObservableBoolean(false)
+    val error = ObservableBoolean(false)
 
-    @JvmField val numberOfActiveTasks = ObservableField<String>()
+    val numberOfActiveTasks = ObservableField<String>()
 
-    @JvmField val numberOfCompletedTasks = ObservableField<String>()
+    val numberOfCompletedTasks = ObservableField<String>()
 
     /**
      * Controls whether the stats are shown or a "No data" message.
      */
-    @JvmField val empty = ObservableBoolean()
+    val empty = ObservableBoolean()
 
     private var mNumberOfActiveTasks = 0
 
@@ -67,7 +67,7 @@ class StatisticsViewModel constructor(context: Application, tasksRepository: Tas
     fun loadStatistics() {
         dataLoading.set(true)
 
-        mTasksRepository.getTasks(object: TasksDataSource.LoadTasksCallback {
+        mTasksRepository.getTasks(object : TasksDataSource.LoadTasksCallback {
             override fun onTasksLoaded(tasks: List<Task>?) {
                 error.set(false)
                 tasks?.run { computeStats(this) }

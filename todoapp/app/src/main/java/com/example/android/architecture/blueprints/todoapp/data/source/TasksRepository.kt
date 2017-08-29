@@ -72,7 +72,6 @@ private constructor(
     /**
      * This variable has package local visibility so it can be accessed from tests.
      */
-    @JvmField
     var mCachedTasks: MutableMap<String, Task>? = null
 
     /**
