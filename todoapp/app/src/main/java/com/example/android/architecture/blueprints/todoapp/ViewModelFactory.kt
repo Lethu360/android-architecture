@@ -60,20 +60,16 @@ class ViewModelFactory private constructor(application: Application, repository:
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(StatisticsViewModel::class.java)) {
-            //noinspection unchecked
-            val statisticsViewModel = StatisticsViewModel(mApplication, mTasksRepository)
-            return statisticsViewModel as T
-        } else if (modelClass.isAssignableFrom(TaskDetailViewModel::class.java)) {
-            //noinspection unchecked
-            return TaskDetailViewModel(mApplication, mTasksRepository) as T
-        } else if (modelClass.isAssignableFrom(AddEditTaskViewModel::class.java)) {
-            //noinspection unchecked
-            return AddEditTaskViewModel(mApplication, mTasksRepository) as T
-        } else if (modelClass.isAssignableFrom(TasksViewModel::class.java)) {
-            //noinspection unchecked
-            return TasksViewModel(mApplication, mTasksRepository) as T
+        return when {
+            modelClass.isAssignableFrom(StatisticsViewModel::class.java) ->
+                StatisticsViewModel(mApplication, mTasksRepository) as T
+            modelClass.isAssignableFrom(TaskDetailViewModel::class.java) ->
+                TaskDetailViewModel(mApplication, mTasksRepository) as T
+            modelClass.isAssignableFrom(AddEditTaskViewModel::class.java) ->
+                AddEditTaskViewModel(mApplication, mTasksRepository) as T
+            modelClass.isAssignableFrom(TasksViewModel::class.java) ->
+                TasksViewModel(mApplication, mTasksRepository) as T
+            else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
-        throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
 }
