@@ -20,7 +20,6 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LifecycleRegistry
 
-
 val TEST_OBSERVER: LifecycleOwner = object : LifecycleOwner {
 
     private val mRegistry = init()
@@ -39,6 +38,6 @@ val TEST_OBSERVER: LifecycleOwner = object : LifecycleOwner {
     }
 }
 
-fun <T> wrap(t: T?): T{
+fun <T> wrap(t: T?): T {
     return t as T
 }
